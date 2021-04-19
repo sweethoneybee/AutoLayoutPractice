@@ -14,6 +14,7 @@
 		405793FF262B392D0011C0CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 405793FE262B392D0011C0CF /* Assets.xcassets */; };
 		40579402262B392D0011C0CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40579400262B392D0011C0CF /* LaunchScreen.storyboard */; };
 		4057940B262B39A40011C0CF /* SocialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4057940A262B39A30011C0CF /* SocialTableViewCell.swift */; };
+		40B31E05262DC3A600037BCD /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B31E04262DC3A600037BCD /* Feed.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		40579401262B392D0011C0CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		40579403262B392D0011C0CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4057940A262B39A30011C0CF /* SocialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialTableViewCell.swift; sourceTree = "<group>"; };
+		40B31E04262DC3A600037BCD /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				405793FB262B392B0011C0CF /* Main.storyboard */,
 				405793FE262B392D0011C0CF /* Assets.xcassets */,
 				4057940A262B39A30011C0CF /* SocialTableViewCell.swift */,
+				40B31E04262DC3A600037BCD /* Feed.swift */,
 				40579400262B392D0011C0CF /* LaunchScreen.storyboard */,
 				40579403262B392D0011C0CF /* Info.plist */,
 			);
@@ -141,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				405793FA262B392B0011C0CF /* ViewController.swift in Sources */,
+				40B31E05262DC3A600037BCD /* Feed.swift in Sources */,
 				405793F6262B392B0011C0CF /* AppDelegate.swift in Sources */,
 				4057940B262B39A40011C0CF /* SocialTableViewCell.swift in Sources */,
 				405793F8262B392B0011C0CF /* SceneDelegate.swift in Sources */,

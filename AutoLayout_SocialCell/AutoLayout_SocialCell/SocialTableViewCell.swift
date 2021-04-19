@@ -9,6 +9,8 @@ import UIKit
 
 class SocialTableViewCell: UITableViewCell {
     
+    private var bodyImageRatioConstraint: NSLayoutConstraint!
+    
     var feed: Feed! {
         didSet {
             profileImageView?.image = feed.author.profileImage
@@ -21,6 +23,16 @@ class SocialTableViewCell: UITableViewCell {
             bodyTextLabel?.isHidden = bodyTextLabel?.text?.isEmpty == true
             bodyImageView?.isHidden = bodyImageView?.image == nil
             
+            // 옛날 이미지의 constraint가 있는 경우 삭제하는 것
+            if let imageRatioConstraint = self.bodyImageRatioConstraint {
+                imageRatioConstraint.isActive = false
+                self.bodyImageView.removeConstraint(imageRatioConstraint)
+            }
+            
+            // 이미지뷰에 이미지가 있으면 ratioConstraint 만들어 주는 것
+            if let image = bodyImageView.image {
+                bodyImageRatioConstraint = bodyImageView.heightAnchor.constraint(equalTo: bodyImageView.widthAnchor, multiplier: image.size.height / image.size.width)
+            }
         }
     }
     
@@ -141,15 +153,34 @@ class SocialTableViewCell: UITableViewCell {
             stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
             stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            profileImageView.widthAnchor.constraint(equalTo: profileImageView.heightAnchor),
-            profileImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.1),
-            bodyImageView.widthAnchor.constraint(equalTo: bodyImageView.heightAnchor),
         ])
+        
+        profileImageView.widthAnchor.constraint(equalTo: profileImageView.heightAnchor).isActive = true
+        profileImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.1).isActive = true
+        let squareConstraint = bodyImageView.widthAnchor.constraint(equalTo: bodyImageView.heightAnchor)
+        squareConstraint.isActive = true
+        squareConstraint.priority = .defaultHigh
         
         thumbsUpImageView.widthAnchor.constraint(equalTo: thumbsUpImageView.heightAnchor).isActive = true
         thumbsUpImageView.heightAnchor.constraint(greaterThanOrEqualToConstant: 30).isActive = true
         let thumbsUpHeight = thumbsUpImageView.heightAnchor.constraint(lessThanOrEqualTo: likeCountLabel.heightAnchor)
         thumbsUpHeight.priority = .defaultHigh
         thumbsUpHeight.isActive = true
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapImageView(_:)))
+        self.bodyImageView.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func tapImageView(_ sender: UITapGestureRecognizer) {
+        guard let imageConstraint = self.bodyImageRatioConstraint else {
+            return
+        }
+        
+        imageConstraint.isActive = !imageConstraint.isActive
+        UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) {
+            self.layoutIfNeeded()
+        }.startAnimation()
+        
+        NotificationCenter.default.post(name: NSNotification.Name("NeedsUpdateLayout"), object: nil)
     }
 }

@@ -14,8 +14,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureTable()
+    
+        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name("NeedsUpdateLayout"), object: nil, queue: nil) {[weak self] (noti) in
+            self?.tableView.performBatchUpdates(nil, completion: nil)
+        }
     }
-
+    
     private func configureTable() {
         self.tableView.register(SocialTableViewCell.self, forCellReuseIdentifier: "cell")
     }

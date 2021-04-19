@@ -12,12 +12,17 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let menuButton = MenuButton()
-        menuButton.translatesAutoresizingMaskIntoConstraints = false
+        let menuButton: MenuButton = { button in
+            button.translatesAutoresizingMaskIntoConstraints = false
+            
+            return button
+        }(MenuButton())
         
         self.view.addSubview(menuButton)
-        menuButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        menuButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
+        
+        let safeArea = self.view.safeAreaLayoutGuide
+        menuButton.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20).isActive = true
+        menuButton.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -20).isActive = true
     }
 
 

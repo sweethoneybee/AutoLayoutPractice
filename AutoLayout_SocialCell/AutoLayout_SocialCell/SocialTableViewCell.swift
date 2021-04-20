@@ -73,11 +73,13 @@ class SocialTableViewCell: UITableViewCell {
         nameLabel.font = .preferredFont(forTextStyle: .caption1)
         nameLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
         nameLabel.setContentCompressionResistancePriority(.required, for: .vertical) // 중요한 내용이니 보존하는 역할로
+        nameLabel.adjustsFontForContentSizeCategory = true
         
         uploadTimeLabel = UILabel()
         uploadTimeLabel.font = .preferredFont(forTextStyle: .caption2)
         uploadTimeLabel.setContentHuggingPriority(.init(1), for: .horizontal)
         uploadTimeLabel.textAlignment = .left
+        uploadTimeLabel.adjustsFontForContentSizeCategory = true
         
         let profileStack = UIStackView(arrangedSubviews: [profileImageView, nameLabel, uploadTimeLabel])
         profileStack.axis = .horizontal
@@ -90,6 +92,7 @@ class SocialTableViewCell: UITableViewCell {
         bodyTextLabel.font = .preferredFont(forTextStyle: .body)
         bodyTextLabel.numberOfLines = 0
         bodyTextLabel.setContentCompressionResistancePriority(.required, for: .vertical)
+        bodyTextLabel.adjustsFontForContentSizeCategory = true
         
         bodyImageView = UIImageView()
         bodyImageView.clipsToBounds = true
@@ -107,7 +110,7 @@ class SocialTableViewCell: UITableViewCell {
             label.font = .preferredFont(forTextStyle: .callout)
             label.setContentHuggingPriority(.defaultLow, for: .horizontal)
             label.text = "0개"
-            
+            label.adjustsFontForContentSizeCategory = true
             return label
         } (UILabel())
         

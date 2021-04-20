@@ -9,20 +9,38 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet var tableView: UITableView!
+    private var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.addTable()
         self.configureTable()
     
-        
         NotificationCenter.default.addObserver(forName: NSNotification.Name("NeedsUpdateLayout"), object: nil, queue: nil) {[weak self] (noti) in
             self?.tableView.performBatchUpdates(nil, completion: nil)
         }
     }
     
+    private func addTable() {
+        tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.automaticallyAdjustsScrollIndicatorInsets = true
+        view.addSubview(tableView)
+        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+    }
+    
     private func configureTable() {
-        self.tableView.register(SocialTableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = UITableView.automaticDimension
+        tableView.register(SocialTableViewCell.self,
+                           forCellReuseIdentifier: "cell")
+        tableView.dataSource = self
+        tableView.separatorStyle = .singleLine
+        tableView.separatorInset = .zero
     }
 }
 

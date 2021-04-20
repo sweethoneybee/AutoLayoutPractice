@@ -81,7 +81,8 @@ class SocialTableViewCell: UITableViewCell {
         
         let profileStack = UIStackView(arrangedSubviews: [profileImageView, nameLabel, uploadTimeLabel])
         profileStack.axis = .horizontal
-        profileStack.alignment = .center
+        profileStack.distribution = .fill
+        profileStack.alignment = .fill
         profileStack.spacing = 5
         
         // body
@@ -113,7 +114,7 @@ class SocialTableViewCell: UITableViewCell {
         let likeStackView: UIStackView = { stack in
             stack.axis = .horizontal
             stack.distribution = .fill
-            stack.alignment = .center
+            stack.alignment = .fill
             stack.spacing = UIStackView.spacingUseSystem
             
             return stack
@@ -154,9 +155,13 @@ class SocialTableViewCell: UITableViewCell {
             stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
         ])
+        stackView.constraints.forEach { (constraint) in
+            constraint.priority = .defaultLow
+        }
         
-        profileImageView.widthAnchor.constraint(equalTo: profileImageView.heightAnchor).isActive = true
         profileImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.1).isActive = true
+        profileImageView.widthAnchor.constraint(equalTo: profileImageView.heightAnchor).isActive = true
+        
         let squareConstraint = bodyImageView.widthAnchor.constraint(equalTo: bodyImageView.heightAnchor)
         squareConstraint.isActive = true
         squareConstraint.priority = .defaultHigh
